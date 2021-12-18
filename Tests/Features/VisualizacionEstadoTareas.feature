@@ -10,10 +10,15 @@ Característica: Visualización del estado de tareas
     Entonces se mostrará el mensaje "No existen tareas para mostrar" al usuario
     Y se mostrará un botón para "Crear una nueva tarea"
 
-  Escenario: Existen tareas
-    Dado que existen las siguientes tareas
-      | nombre_tarea                  | responsable | fecha_inicio | fecha_fin  |
-      | Elicitacion de requerimientos | Santiago    | 18-12-2021   | 23-12-2021 |
-
+  Esquema del escenario: Existen tareas
+    Dado que existe la tarea <nombre_tarea> tiene un estado <estado>
     Cuando se presente el diagrama de Gantt
-    Entonces cada tarea se
+    Entonces la tarea se coloreará de <color_estado>
+    Y la tarea tendrá una etiqueta con el mensaje <mensaje_estado>
+
+    Ejemplos:
+      | nombre_tarea                  | estado      | color_estado | mensaje_estado |
+      | Elicitación de requerimientos | Pendiente   | celeste      | Pendiente      |
+      | Diseño de alto nivel          | Completado  | verde        | Completado     |
+      | Implementación del software   | En progreso | amarillo     | En progreso    |
+      | Diseño del plan de pruebas    | Atrasado    | naranja      | Atrasado       |
