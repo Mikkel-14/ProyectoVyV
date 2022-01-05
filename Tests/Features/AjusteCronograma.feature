@@ -1,6 +1,6 @@
 # Created by Mahatma at 18/12/2021
 # language: es
-Característica: Ajuste automático de cronograma
+Característica: [CA6] Ajuste automático de cronograma
   Como administrador del proyecto deseo poder ajustar las fechas de las tareas
   de forma automática sin alterar el orden de flujo del trabajo, para poder ajustar
   el proyecto a cambios inesperados.

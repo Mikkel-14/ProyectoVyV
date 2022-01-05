@@ -1,6 +1,6 @@
 # Created by joset at 12/18/2021
 #language: es
-Característica: Visualización del estado de tareas
+Característica: [CA4] Visualización del estado de tareas
   Como administrador del proyecto deseo identificar las tareas que están atrasadas, pendientes,
   en progreso y finalizadas, para evitar que el proyecto se retrase.
 
