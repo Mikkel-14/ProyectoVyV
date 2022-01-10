@@ -1,0 +1,45 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+'abstract class AbstractList
+'abstract AbstractCollection
+'interface List
+'interface Collection
+'
+'List <|-- AbstractList
+'Collection <|-- AbstractCollection
+'
+'Collection <|- List
+'AbstractCollection <|- AbstractList
+'AbstractList <|-- ArrayList
+'
+'class ArrayList {
+'Object[] elementData
+'size()
+'}
+'
+'enum TimeUnit {
+'DAYS
+'HOURS
+'MINUTES
+'}
+
+class Proyecto{
+    - nombre_proyecto: String
+}
+
+class Tarea{
+    - nombre_tarea: String
+    - fecha_inicial: Date
+    - fecha_limite: Date
+    - esta_completado:  boolean
+}
+
+class Estado{
+    - nombre_estado: String
+    - color_estado: String
+}
+
+Proyecto o-- "*" Tarea
+Tarea "*" --> "1" Estado
+@enduml

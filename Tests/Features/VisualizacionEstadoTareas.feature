@@ -5,20 +5,25 @@ Característica: [CA4] Visualización del estado de tareas
   en progreso y finalizadas, para evitar que el proyecto se retrase.
 
   Escenario: No existen tareas
-    Dado que no existen tareas
+    Dado que el proyecto no tiene tareas
     Cuando se presente el diagrama de Gantt
     Entonces se mostrará el mensaje "No existen tareas para mostrar" al usuario
     Y se mostrará un botón para "Crear una nueva tarea"
-#¿Cómo se va a marcar el progreso?
+
   Esquema del escenario: Existen tareas
-    Dado que existe la tarea <nombre_tarea> tiene un estado <estado>
-    Cuando se presente el diagrama de Gantt
-    Entonces la tarea se coloreará de <color_estado>
-    Y la tarea tendrá una etiqueta con el mensaje <mensaje_estado>
+    Dado que en el proyecto existe la tarea <nombre_tarea>
+    Cuando la fecha de inicio de la tarea sea <fecha_inicial>
+    Y la fecha límite de la tarea sea <fecha_limite>
+    Y la fecha actual del sistema sea <fecha_actual>
+    Y el responsable marcó la culminación de la tarea con <esta_completado>
+    Y se estableció que una tarea en progreso tiene el estado crítico si faltan 7 días o menos hasta su <fecha_limite>
+    Entonces la tarea tendrá el estado <estado>
+    Y se mostrará la tarea en el diagrama de Gannt con el color <color_estado>
 
     Ejemplos:
-      | nombre_tarea                  | estado      | color_estado | mensaje_estado |
-      | Elicitación de requerimientos | Pendiente   | celeste      | Pendiente      |
-      | Diseño de alto nivel          | Completado  | verde        | Completado     |
-      | Implementación del software   | En progreso | amarillo     | En progreso    |
-      | Diseño del plan de pruebas    | Atrasado    | naranja      | Atrasado       |
+      | nombre_tarea                  | estado      | color_estado | fecha_inicial | fecha_actual | fecha_limite | esta_completado |
+      | Elicitación de requerimientos | pendiente   | #7f8fa6      | 10-02-2022    | 10-01-2022   | 10-03-2022   | false           |
+      | Diseño de alto nivel          | completado  | #4cd137      | 23-11-2021    | 10-01-2022   | 12-12-2021   | true            |
+      | Implementación del software   | en-progreso | #fbc531      | 06-12-2021    | 10-01-2022   | 31-01-2022   | false           |
+      | Plan de proyecto              | crítico     | #e17055      | 06-12-2021    | 10-01-2022   | 12-01-2022   | false           |
+      | Diseño del plan de pruebas    | atrasado    | #d63031      | 13-11-2021    | 10-01-2022   | 10-12-2021   | false           |
