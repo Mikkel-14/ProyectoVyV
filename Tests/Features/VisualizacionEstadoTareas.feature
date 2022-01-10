@@ -22,8 +22,8 @@ Característica: [CA4] Visualización del estado de tareas
 
     Ejemplos:
       | nombre_tarea                  | estado      | color_estado | fecha_inicial | fecha_actual | fecha_limite | esta_completado |
-      | Elicitación de requerimientos | pendiente   | celeste      | 10-02-2022    | 10-01-2022   | 10-03-2022   | false           |
-      | Diseño de alto nivel          | completado  | verde        | 23-11-2021    | 10-01-2022   | 12-12-2021   | true            |
-      | Implementación del software   | en-progreso | amarillo     | 06-12-2021    | 10-01-2022   | 31-01-2022   | false           |
-      | Plan de proyecto              | crítico     | naranja      | 06-12-2021    | 10-01-2022   | 12-01-2022   | false           |
-      | Diseño del plan de pruebas    | atrasado    | rojo         | 13-11-2021    | 10-01-2022   | 10-12-2021   | false           |
+      | Elicitación de requerimientos | pendiente   | #7f8fa6      | 10-02-2022    | 10-01-2022   | 10-03-2022   | false           |
+      | Diseño de alto nivel          | completado  | #4cd137      | 23-11-2021    | 10-01-2022   | 12-12-2021   | true            |
+      | Implementación del software   | en-progreso | #fbc531      | 06-12-2021    | 10-01-2022   | 31-01-2022   | false           |
+      | Plan de proyecto              | crítico     | #e17055      | 06-12-2021    | 10-01-2022   | 12-01-2022   | false           |
+      | Diseño del plan de pruebas    | atrasado    | #d63031      | 13-11-2021    | 10-01-2022   | 10-12-2021   | false           |
