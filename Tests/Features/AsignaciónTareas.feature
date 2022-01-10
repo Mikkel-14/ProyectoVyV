@@ -1,6 +1,6 @@
 # Created by Mahatma at 18/12/2021
 # language: es
-Característica: Asignación de tareas
+Característica: [CA1] Asignación de tareas
   Como administrador del proyecto deseo identificar el número de actividades
   asignadas a cada empleado para evitar la sobrecarga de trabajo.
 

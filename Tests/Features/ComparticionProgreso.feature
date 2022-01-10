@@ -1,6 +1,6 @@
 # Created by Mahatma at 18/12/2021
 # language: es
-Característica: Registrar avances del progreso
+Característica: [CA3] Registrar avances del progreso
   #Como colaborador del proyecto quiero compartir información sobre el progreso de mis tareas
   #con mis compañeros de proyecto, para que puedan planificar las tareas que dependan de las mías y minimicen
   #el desperdicio de horas laborales.

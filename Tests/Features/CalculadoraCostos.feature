@@ -1,6 +1,6 @@
 # Created by Mahatma at 18/12/2021
 # language: es
-Característica: Calculadora de costos de proyecto
+Característica: [CA5] Calculadora de costos de proyecto
   Como administrador del proyecto quiero obtener un cálculo automático del costo total del proyecto
   o grupos de tareas en base a los recursos y el tiempo, para poder verificar que el proyecto se
   encuentre dentro del presupuesto.
