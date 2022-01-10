@@ -9,7 +9,7 @@ Característica: Visualización del estado de tareas
     Cuando se presente el diagrama de Gantt
     Entonces se mostrará el mensaje "No existen tareas para mostrar" al usuario
     Y se mostrará un botón para "Crear una nueva tarea"
-
+#¿Cómo se va a marcar el progreso?
   Esquema del escenario: Existen tareas
     Dado que existe la tarea <nombre_tarea> tiene un estado <estado>
     Cuando se presente el diagrama de Gantt
