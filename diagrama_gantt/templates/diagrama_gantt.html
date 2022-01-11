@@ -7,9 +7,31 @@
     <meta charset="UTF-8">
     <title>Diagrama del proyecto</title>
     <style>
-        td:first-child, th:first-child{
+        thead{
+            background: white;
+            position: sticky;
+            top: 0;
+        }
+        td:first-child {
             position: sticky;
             left: 0;
+            background: white;
+            z-index: 0 !important;
+        }
+        #tareas {
+            position: sticky;
+            left: 0;
+            top: 0 !important;
+            background: white;
+            z-index: 3;
+        }
+        nav{
+            height: 6.5vh;
+        }
+        section{
+            overflow: auto;
+            height: 93.5vh;
+            padding: 0 !important;
         }
     </style>
 </head>
@@ -48,102 +70,51 @@
         </div>
     </div>
 </nav>
-<section class="container-fluid" style="overflow: auto; height: 80vh;">
+<section class="container-fluid">
     <table class="table table-striped">
-        <thead style="position: sticky; top: 0;">
+        <thead>
             <tr>
-                <th scope="col" colspan="1" style="width: 50%;">Tareas</th>
-                {# TODO Crear columnas en base a las fechas (inicial-final) #}
-                {% for tarea in tareas %}
-                    <th scope="col" colspan="7">Semana 1</th>
-                    <th scope="col" colspan="7">Semana 2</th>
-                    <th scope="col" colspan="7">Semana 3</th>
-                    <th scope="col" colspan="7">Semana 4</th>
-                    <th scope="col" colspan="7">Semana 5</th>
-                    <th scope="col" colspan="7">Semana 6</th>
+                <th id="tareas" scope="col" colspan="1" rowspan="2">Tareas</th>
+                <!-- Semanas-->
+                <th scope="col" colspan={{ colspan_inicio }}>Semana 1</th>
+                {% for value in semanas_intermedias %}
+                    <th scope="col" colspan="7">Semana {{ value }}</th>
                 {% endfor %}
+                <th scope="col" colspan={{ colspan_final }}>Semana final</th>
             </tr>
+            <!-- Días -->
             <tr>
-                <th></th>
-                <!---->
-                <th>L</th>
-                <th>M</th>
-                <th>X</th>
-                <th>J</th>
-                <th>V</th>
-                <th>S</th>
-                <th>D</th>
-                <!---->
-                <th>L</th>
-                <th>M</th>
-                <th>X</th>
-                <th>J</th>
-                <th>V</th>
-                <th>S</th>
-                <th>D</th>
-                <!---->
-                <th>L</th>
-                <th>M</th>
-                <th>X</th>
-                <th>J</th>
-                <th>V</th>
-                <th>S</th>
-                <th>D</th>
-                <!---->
-                <th>L</th>
-                <th>M</th>
-                <th>X</th>
-                <th>J</th>
-                <th>V</th>
-                <th>S</th>
-                <th>D</th>
-                <!---->
-                <th>L</th>
-                <th>M</th>
-                <th>X</th>
-                <th>J</th>
-                <th>V</th>
-                <th>S</th>
-                <th>D</th>
-                <!---->
-                <th>L</th>
-                <th>M</th>
-                <th>X</th>
-                <th>J</th>
-                <th>V</th>
-                <th>S</th>
-                <th>D</th>
+                {% for dia in lista_fechas %}
+                   <th>{{ dia | date:'D d' }}</th>
+                {% endfor %}
             </tr>
         </thead>
         <tbody>
-            {% for tarea in tareas %}
+            {% for item in tareas %}
                 <tr>
-                    <td>TareaASddsfgfhffs</td>
+                    <td>
+                        {{ item.tarea.nombre_tarea }}
+                        <button type="button" class="btn btn-primary">Ver tarea</button>
+                    </td>
+                    <td colspan={{ item.dia_offset }}></td>
+                    <td colspan={{ item.duracion }}>
+                        <button type="button" class="btn btn-primary" style="width: 100%;">{{ item.tarea.nombre_tarea }}</button>
+                    </td>
+                    <td colspan={{ item.post_offset }}></td>
                 </tr>
+            {% endfor %}
+            {% for item in tareas %}
                 <tr>
-                    <td>TareaASddsfgfhffs</td>
+                    <td>
+                        {{ item.tarea.nombre_tarea }}
+                        <button type="button" class="btn btn-primary">Ver tarea</button>
+                    </td>
+                    <td colspan={{ item.dia_offset }}></td>
+                    <td colspan={{ item.duracion }}>
+                        <button type="button" class="btn btn-primary" style="width: 100%">{{ item.tarea.nombre_tarea }}</button>
+                    </td>
+                    <td colspan={{ item.post_offset }}></td>
                 </tr>
-                <tr>
-                    <td>TareaASddsfgfhffs</td>
-                </tr><tr>
-                    <td>TareaASddsfgfhffs</td>
-                </tr><tr>
-                    <td>TareaASddsfgfhffs</td>
-                </tr>
-                <tr>
-                    <td>TareaASddsfgfhffs</td>
-                </tr>
-                <tr>
-                    <td>TareaASddsfgfhffs</td>
-                </tr>
-                <tr>
-                    <td>TareaASddsfgfhffs</td>
-                </tr><tr>
-                    <td>TareaASddsfgfhffs</td>
-                </tr>
-
-
-
             {% endfor %}
         </tbody>
     </table>
