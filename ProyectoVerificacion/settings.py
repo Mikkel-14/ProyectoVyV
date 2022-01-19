@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap5',
-    'diagrama_gantt'
+    'diagrama_gantt',
+    'behave_django'
 ]
 
 MIDDLEWARE = [

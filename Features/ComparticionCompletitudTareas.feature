@@ -1,5 +1,6 @@
 # Created by Mahatma at 18/12/2021
 # language: es
+@CA3
 Característica: [CA3] Compartición de completitud de tareas
   Como colaborador de un proyecto tengo que actualizar la completitud de mis tareas
   para que el sistema pueda marcar las tareas críticas

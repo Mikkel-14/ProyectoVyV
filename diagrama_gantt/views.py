@@ -1,18 +1,18 @@
 import datetime
 from datetime import timedelta
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from diagrama_gantt.models import Proyecto, Tarea, Estado
 from django.db.models import Min, Max
 
 
 # Create your views here.
-def index(request):
-    #TODO Definir a que proyecto se hace referencia
-    proyectoID = 1
+def index(request, idProyecto):
+    proyecto = Proyecto.objects.get(id=idProyecto)
+    tareas = Tarea.objects.filter(proyecto=idProyecto)
 
-    proyecto = Proyecto.objects.get(id=proyectoID)
-    tareas = Tarea.objects.filter(proyecto=proyectoID)
+    if tareas.count() == 0:
+        return redirect('crearTarea')
 
     # El proyecto puede tener una fecha inicial y una de fin o ser calculadas???
     menor_fecha = Tarea.objects.all().aggregate(Min('fecha_inicial'))['fecha_inicial__min']
@@ -52,4 +52,3 @@ def index(request):
     }
 
     return render(request, 'diagrama_gantt.html', data)
-

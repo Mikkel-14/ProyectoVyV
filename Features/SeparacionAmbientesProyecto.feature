@@ -1,5 +1,6 @@
 # Created by joset at 12/18/2021
 # language: es
+@CA2
 Característica: [CA2] Separación de ambientes de proyecto
   Como director de proyectos deseo poder separar la información de cada proyecto en espacios de
   trabajo aislados, para poder gestionar las tareas de múltiples proyectos sin confundirme.

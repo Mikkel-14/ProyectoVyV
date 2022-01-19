@@ -9,10 +9,6 @@ Característica: [CA4] Visualización del estado de tareas
     Dado que se ingresa a un proyecto dado
     Cuando no existen tareas
     Entonces el sistema redirigirá al usuario a la ventana de creación de nueva tarea
-#    Dado que el proyecto no tiene tareas
-#    Cuando se presente el diagrama de Gantt
-#    Entonces se mostrará el mensaje "No existen tareas para mostrar" al usuario
-#    Y se mostrará un botón para "Crear una nueva tarea"
 
   Esquema del escenario: Existen tareas
     Dado que en el proyecto existe la tarea <nombre_tarea>

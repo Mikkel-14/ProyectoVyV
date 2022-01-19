@@ -18,5 +18,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('gantt/', include('diagrama_gantt.urls'))
+    path('proyectos/<int:idProyecto>/gantt/', include('diagrama_gantt.urls')),
+    path('tareas/', include('tareas.urls')),
 ]
