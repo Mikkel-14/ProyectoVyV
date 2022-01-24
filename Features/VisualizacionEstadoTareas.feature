@@ -6,8 +6,7 @@ Característica: [CA4] Visualización del estado de tareas
   en progreso y finalizadas, para evitar que el proyecto se retrase.
 
   Escenario: No existen tareas
-    Dado que se ingresa a un proyecto dado
-    Cuando no existen tareas
+    Dado que se ingresa a un proyecto sin tareas
     Entonces el sistema redirigirá al usuario a la ventana de creación de nueva tarea
 
   Esquema del escenario: Existen tareas

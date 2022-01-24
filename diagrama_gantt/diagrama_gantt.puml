@@ -41,5 +41,4 @@ class Estado{
 }
 
 Proyecto o-- "*" Tarea
-Tarea "*" --> "1" Estado
 @enduml

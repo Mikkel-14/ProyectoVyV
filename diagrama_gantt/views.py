@@ -7,12 +7,16 @@ from django.db.models import Min, Max
 
 
 # Create your views here.
-def index(request, idProyecto):
-    proyecto = Proyecto.objects.get(id=idProyecto)
-    tareas = Tarea.objects.filter(proyecto=idProyecto)
+def acceso_tareas_guard(request, id_proyecto):
+    proyecto = Proyecto.objects.get(id=id_proyecto)
+    if proyecto.tieneTareas():
+        return index(request, id_proyecto)
+    return redirect('crearTarea')
 
-    if tareas.count() == 0:
-        return redirect('crearTarea')
+
+def index(request, id_proyecto):
+    proyecto = Proyecto.objects.get(id=id_proyecto)
+    tareas = Tarea.objects.filter(proyecto=id_proyecto)
 
     # El proyecto puede tener una fecha inicial y una de fin o ser calculadas???
     menor_fecha = Tarea.objects.all().aggregate(Min('fecha_inicial'))['fecha_inicial__min']
@@ -24,10 +28,10 @@ def index(request, idProyecto):
     lista_fechas = [menor_fecha + timedelta(days=x) for x in range(diferencia_dias.days + 1)]
 
     # Total semanas
-    semanas = diferencia_dias.days /7
+    semanas = diferencia_dias.days / 7
 
     lunes_anterior = menor_fecha - timedelta(days=menor_fecha.weekday())
-    domingo_siguiente = mayor_fecha + timedelta(days= 6 - mayor_fecha.weekday())
+    domingo_siguiente = mayor_fecha + timedelta(days=6 - mayor_fecha.weekday())
 
     diferencia = domingo_siguiente - lunes_anterior
     semanas = (diferencia.days / 7) - 2
@@ -48,7 +52,7 @@ def index(request, idProyecto):
         'lista_fechas': lista_fechas,
         'colspan_inicio': 7 - menor_fecha.weekday(),
         'colspan_final': mayor_fecha.weekday() + 1,
-        'semanas_intermedias': range(2,int(semanas)+3)
+        'semanas_intermedias': range(2, int(semanas) + 3)
     }
 
     return render(request, 'diagrama_gantt.html', data)

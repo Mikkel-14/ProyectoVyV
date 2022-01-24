@@ -1,7 +1,11 @@
 from django.db import models
 
+
 class Proyecto(models.Model):
     nombre_proyecto = models.CharField(max_length=100)
+
+    def tieneTareas(self):
+        return Tarea.objects.filter(proyecto=self.id).count() > 0
 
 
 class Estado(models.Model):
