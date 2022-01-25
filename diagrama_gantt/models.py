@@ -21,22 +21,21 @@ class Tarea(models.Model):
     fecha_limite = models.DateField()
     esta_completado = models.BooleanField()
 
-    def es_critica(self, to_time=datetime.now().date()):
-        time_left = self.fecha_limite - to_time
-        return (0 <= time_left.days <= 7) and not self.esta_completado
+    def es_critica(self, fecha_actual=datetime.now().date()):
+        tiempo_restante = self.fecha_limite - fecha_actual
+        return (0 <= tiempo_restante.days <= 7) and not self.esta_completado
 
     def obtener_estado(self, fecha_actual=datetime.now().date()):
         if self.esta_completado:
             return 'completado'
+        elif fecha_actual < self.fecha_inicial:
+            return 'pendiente'
+        elif self.es_critica(fecha_actual):
+            return 'crítico'
+        elif fecha_actual > self.fecha_limite:
+            return 'atrasado'
         else:
-            if fecha_actual < self.fecha_inicial:
-                return 'pendiente'
-            elif self.es_critica(fecha_actual):
-                return 'crítico'
-            elif (fecha_actual > self.fecha_limite) and not self.esta_completado:
-                return 'atrasado'
-            else:
-                return 'en-progreso'
+            return 'en-progreso'
 
     def obtener_color(self, fecha_actual=datetime.now().date()):
         return Estado.objects.get(nombre_estado=self.obtener_estado(fecha_actual)).color_estado

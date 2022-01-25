@@ -81,7 +81,7 @@ def step_impl(context, fecha_limite):
     :type context: behave.runner.Context
     :type fecha_limite: str
     """
-    context.tipo_tarea = context.tarea.es_critica(to_time=context.fecha_actual)
+    context.tipo_tarea = context.tarea.es_critica(fecha_actual=context.fecha_actual)
 
 
 @step("la tarea tendrá el estado (?P<estado>.+)")
