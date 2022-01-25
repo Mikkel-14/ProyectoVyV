@@ -1,10 +1,11 @@
 from django.db import models
+from datetime import datetime
 
 
 class Proyecto(models.Model):
     nombre_proyecto = models.CharField(max_length=100)
 
-    def tieneTareas(self):
+    def tiene_tareas(self):
         return Tarea.objects.filter(proyecto=self.id).count() > 0
 
 
@@ -19,3 +20,23 @@ class Tarea(models.Model):
     fecha_inicial = models.DateField()
     fecha_limite = models.DateField()
     esta_completado = models.BooleanField()
+
+    def es_critica(self, to_time=datetime.now().date()):
+        time_left = self.fecha_limite - to_time
+        return (0 <= time_left.days <= 7) and not self.esta_completado
+
+    def obtener_estado(self, fecha_actual=datetime.now().date()):
+        if self.esta_completado:
+            return 'completado'
+        else:
+            if fecha_actual < self.fecha_inicial:
+                return 'pendiente'
+            elif self.es_critica(fecha_actual):
+                return 'crítico'
+            elif (fecha_actual > self.fecha_limite) and not self.esta_completado:
+                return 'atrasado'
+            else:
+                return 'en-progreso'
+
+    def obtener_color(self, fecha_actual=datetime.now().date()):
+        return Estado.objects.get(nombre_estado=self.obtener_estado(fecha_actual)).color_estado

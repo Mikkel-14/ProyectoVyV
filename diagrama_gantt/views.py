@@ -9,7 +9,7 @@ from django.db.models import Min, Max
 # Create your views here.
 def acceso_tareas_guard(request, id_proyecto):
     proyecto = Proyecto.objects.get(id=id_proyecto)
-    if proyecto.tieneTareas():
+    if proyecto.tiene_tareas():
         return index(request, id_proyecto)
     return redirect('crearTarea')
 
