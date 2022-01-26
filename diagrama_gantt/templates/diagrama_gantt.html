@@ -12,6 +12,10 @@
             position: sticky;
             top: 0;
         }
+        tr th {
+            border-left: solid 1px rgb(222, 226, 230);
+            border-right: solid 1px rgb(222, 226, 230);
+        }
         td:first-child {
             position: sticky;
             left: 0;
@@ -33,6 +37,22 @@
             height: 93.5vh;
             padding: 0 !important;
         }
+        .tarea {
+            width: 100%;
+            display: block;
+            color:white;
+            font-weight: 600;
+        }
+        .hoy {
+            background-color: #686de0 !important;
+            color: white;
+        }
+        .dia{
+            white-space: nowrap
+        }
+        td{
+            vertical-align: middle;
+        }
     </style>
 </head>
 <body class="container-fluid">
@@ -45,6 +65,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li>
+                    <a class="nav-link active" aria-current="page" href={% url 'crearTarea' proyecto.id %}>Nueva tarea</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Cambiar de proyecto</a>
                 </li>
@@ -52,21 +75,6 @@
                     <a class="nav-link" href="#">Cerrar sesión</a>
                 </li>
             </ul>
-                {#        <li class="nav-item dropdown">#}
-                {#          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">#}
-                {#            Dropdown#}
-                {#          </a>#}
-                {#          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">#}
-                {#            <li><a class="dropdown-item" href="#">Action</a></li>#}
-                {#            <li><a class="dropdown-item" href="#">Another action</a></li>#}
-                {#            <li><hr class="dropdown-divider"></li>#}
-                {#            <li><a class="dropdown-item" href="#">Something else here</a></li>#}
-                {#          </ul>#}
-                {#        </li>#}
-                {#        <li class="nav-item">#}
-                {#          <a class="nav-link disabled">Disabled</a>#}
-                {#        </li>#}
-                {#      </ul>#}
         </div>
     </div>
 </nav>
@@ -74,44 +82,53 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th id="tareas" scope="col" colspan="1" rowspan="2">Tareas</th>
+                <th id="tareas" scope="col" colspan="1" rowspan="3">Tareas</th>
                 <!-- Semanas-->
-                <th scope="col" colspan={{ colspan_inicio }}>Semana 1</th>
+                <th scope="col" colspan={{ colspan_semana_inicio }}>Semana 1</th>
                 {% for value in semanas_intermedias %}
                     <th scope="col" colspan="7">Semana {{ value }}</th>
                 {% endfor %}
-                <th scope="col" colspan={{ colspan_final }}>Semana final</th>
+                <th scope="col" colspan={{ colspan_semana_final }}>Semana final</th>
+            </tr>
+            <!-- Meses -->
+            <tr>
+                {% for value in meses_info %}
+                    {% if value.fecha.month == hoy.month %}
+                        <th scope="col" colspan={{ value.colspan }} class="hoy">{{ value.fecha | date:'F' }}</th>
+                    {% else %}
+                        <th scope="col" colspan={{ value.colspan }}>{{ value.fecha | date:'F' }}</th>
+                    {% endif %}
+                {% endfor %}
             </tr>
             <!-- Días -->
             <tr>
                 {% for dia in lista_fechas %}
-                   <th>{{ dia | date:'D d' }}</th>
+                    {% if dia == hoy %}
+                        <th class="dia hoy">{{ dia | date:'D d' }}</th>
+                    {% else %}
+                        <th class="dia">{{ dia | date:'D d' }}</th>
+                    {% endif %}
                 {% endfor %}
             </tr>
         </thead>
         <tbody>
             {% for item in tareas %}
                 <tr>
+                    <!-- Nombre tarea -->
                     <td>
                         {{ item.tarea.nombre_tarea }}
-                        <button type="button" class="btn btn-primary">Ver tarea</button>
+                        <a class="btn btn-primary"
+                            href={% url 'verTarea' id_proyecto=proyecto.id id_tarea=item.tarea.id %}>
+                            Ver tarea
+                        </a>
                     </td>
+                    <!-- Botón tarea -->
                     <td colspan={{ item.dia_offset }}></td>
                     <td colspan={{ item.duracion }}>
-                        <button type="button" class="btn btn-primary" style="width: 100%;">{{ item.tarea.nombre_tarea }}</button>
-                    </td>
-                    <td colspan={{ item.post_offset }}></td>
-                </tr>
-            {% endfor %}
-            {% for item in tareas %}
-                <tr>
-                    <td>
-                        {{ item.tarea.nombre_tarea }}
-                        <button type="button" class="btn btn-primary">Ver tarea</button>
-                    </td>
-                    <td colspan={{ item.dia_offset }}></td>
-                    <td colspan={{ item.duracion }}>
-                        <button type="button" class="btn btn-primary" style="width: 100%">{{ item.tarea.nombre_tarea }}</button>
+                        <a class="btn tarea" style={{ item.color_estado }}
+                            href={% url 'verTarea' id_proyecto=proyecto.id id_tarea=item.tarea.id %}>
+                            {{ item.tarea.nombre_tarea }} ({{item.estado|capfirst}})
+                        </a>
                     </td>
                     <td colspan={{ item.post_offset }}></td>
                 </tr>
