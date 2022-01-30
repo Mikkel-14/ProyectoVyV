@@ -1,0 +1,46 @@
+thead{
+    background: white;
+    position: sticky;
+    top: 0;
+}
+tr th {
+    border-left: solid 1px rgb(222, 226, 230);
+    border-right: solid 1px rgb(222, 226, 230);
+}
+td:first-child {
+    position: sticky;
+    left: 0;
+    background: white;
+    z-index: 0 !important;
+}
+#tareas {
+    position: sticky;
+    left: 0;
+    top: 0 !important;
+    background: white;
+    z-index: 3;
+}
+nav{
+    height: 6.5vh;
+}
+section{
+    overflow: auto;
+    height: 93.5vh;
+    padding: 0 !important;
+}
+.tarea {
+    width: 100%;
+    display: block;
+    color:white;
+    font-weight: 600;
+}
+.hoy {
+    background-color: #686de0 !important;
+    color: white;
+}
+.dia{
+    white-space: nowrap
+}
+td{
+    vertical-align: middle;
+}
