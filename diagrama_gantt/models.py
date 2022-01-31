@@ -17,6 +17,7 @@ class Estado(models.Model):
 class Tarea(models.Model):
     proyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE)
     nombre_tarea = models.CharField(max_length=100)
+    descripcion = models.CharField(max_length=500, blank=True, null=True)
     fecha_inicial = models.DateField()
     fecha_limite = models.DateField()
     esta_completado = models.BooleanField()

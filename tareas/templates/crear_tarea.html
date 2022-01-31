@@ -34,55 +34,40 @@
 </nav>
 
 <section class="container-fluid">
-    <!-- <span>Ingrese los datos para crear una nueva tarea</span>
-    <div class="mb-3">
-        <label for="nombre" class="form-label">Nombre de la tarea:</label>
-        <input class="form-control" id="nombre" placeholder="Nombre de la tarea">
+    <div class="d-flex row justify-content-center px-0 mx-0">
+        <form action={% url 'crearTarea' proyecto.id %} method="POST" class="col-5 mt-5">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="{{ form.nombre_tarea.id_for_label }}"
+                class="form-label">
+                    {{ form.nombre_tarea.label }}
+                </label>
+            {{ form.nombre_tarea }}
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.descripcion.id_for_label }}"
+                class="form-label">
+                    {{ form.descripcion.label }}
+                </label>
+            {{ form.descripcion }}
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.fecha_inicio.id_for_label }}"
+                class="form-label">
+                    {{ form.fecha_inicio.label }}
+                </label>
+            {{ form.fecha_inicio }}
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.fecha_limite.id_for_label }}"
+                class="form-label">
+                    {{ form.fecha_limite.label }}
+                </label>
+            {{ form.fecha_limite }}
+            </div>
+            <input class="btn btn-primary" type="submit" value="Crear tarea">
+        </form>
     </div>
-    <div class="mb-3">
-        <label for="descripcion" class="form-label">Descripción:</label>
-        <textarea class="form-control" id="descripcion" rows="3" placeholder="Descripción">
-    </div>
-    <div class="mb-3">
-        <label for="fecha_inicial" class="form-label">Fecha de inicio:</label>
-        <input type="date" class="form-control" id="fecha_inicial" min={{ fecha_hoy|date:"Y-m-d" }}>
-    </div>
-    <div class="mb-3">
-        <label for="fecha_limite" class="form-label">Fecha límite:</label>
-        <input type="date" class="form-control" id="fecha_limite" min={{ fecha_siguiente|date:"Y-m-d" }}>
-    </div> -->
-    <form action={% url 'crearTarea' proyecto.id %} method="POST">
-        {% csrf_token %}
-        <div class="mb-3">
-            <label for="{{ form.nombre_tarea.id_for_label }}"
-            class="form-label">
-                {{ form.nombre_tarea.label }}
-            </label>
-           {{ form.nombre_tarea }}
-        </div>
-        <div class="mb-3">
-            <label for="{{ form.descripcion.id_for_label }}"
-            class="form-label">
-                {{ form.descripcion.label }}
-            </label>
-           {{ form.descripcion }}
-        </div>
-        <div class="mb-3">
-            <label for="{{ form.fecha_inicio.id_for_label }}"
-            class="form-label">
-                {{ form.fecha_inicio.label }}
-            </label>
-           {{ form.fecha_inicio }}
-        </div>
-        <div class="mb-3">
-            <label for="{{ form.fecha_limite.id_for_label }}"
-            class="form-label">
-                {{ form.fecha_limite.label }}
-            </label>
-           {{ form.fecha_limite }}
-        </div>
-        <input class="btn btn-primary" type="submit" value="Crear tarea">
-    </form>
 </section>
 
 </body>

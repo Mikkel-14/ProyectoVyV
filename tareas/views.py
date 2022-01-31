@@ -14,9 +14,10 @@ def crear_tarea(request, id_proyecto):
             descripcion = formulario.cleaned_data['descripcion']
             fecha_inicio = formulario.cleaned_data['fecha_inicio']
             fecha_limite = formulario.cleaned_data['fecha_limite']
-            #creamos la tarea en la BD
+            # Creamos la tarea en la BD
             nueva_tarea = Tarea(
                 nombre_tarea=nombre_tarea,
+                descripcion=descripcion,
                 fecha_inicial=fecha_inicio,
                 fecha_limite=fecha_limite,
                 proyecto=proyecto,

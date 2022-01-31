@@ -27,6 +27,8 @@ section{
     overflow: auto;
     height: 93.5vh;
     padding: 0 !important;
+    justify-content: center;
+    align-items: center;
 }
 .tarea {
     width: 100%;

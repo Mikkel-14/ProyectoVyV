@@ -20,7 +20,7 @@ def step_impl(context):
 
 @step("el sistema redirigirá al usuario a la ventana de creación de nueva tarea")
 def step_impl(context):
-    expected = redirect('crearTarea').url
+    expected = redirect('crearTarea', context.proyecto.id ).url
     actual = acceso_tareas_guard(HttpRequest(), context.proyecto.id).url
     assert expected == actual
 
