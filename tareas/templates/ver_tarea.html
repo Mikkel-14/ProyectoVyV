@@ -20,7 +20,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li>
-                    <a class="nav-link active selected" aria-current="page" href="#">Nueva tarea</a>
+                    <a class="nav-link active" aria-current="page" href={% url 'crearTarea' proyecto.id %}>Nueva tarea</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Cambiar de proyecto</a>
@@ -35,38 +35,28 @@
 
 <section class="container-fluid">
     <div class="d-flex row justify-content-center px-0 mx-0">
-        <form action={% url 'crearTarea' proyecto.id %} method="POST" class="col-5 mt-5">
-            {% csrf_token %}
-            <div class="mb-3">
-                <label for="{{ form.nombre_tarea.id_for_label }}"
-                class="form-label">
-                    {{ form.nombre_tarea.label }}
-                </label>
-            {{ form.nombre_tarea }}
-            </div>
-            <div class="mb-3">
-                <label for="{{ form.descripcion.id_for_label }}"
-                class="form-label">
-                    {{ form.descripcion.label }}
-                </label>
-            {{ form.descripcion }}
-            </div>
-            <div class="mb-3">
-                <label for="{{ form.fecha_inicio.id_for_label }}"
-                class="form-label">
-                    {{ form.fecha_inicio.label }}
-                </label>
-            {{ form.fecha_inicio }}
-            </div>
-            <div class="mb-3">
-                <label for="{{ form.fecha_limite.id_for_label }}"
-                class="form-label">
-                    {{ form.fecha_limite.label }}
-                </label>
-            {{ form.fecha_limite }}
-            </div>
-            <input class="btn btn-primary" type="submit" value="Crear tarea">
-        </form>
+        <div class="col-5 mt-5">
+            <p>
+                <strong>Nombre de tarea:</strong><br>
+                {{ tarea.nombre_tarea }}
+            </p>
+            <p>
+                <strong>Descripción:</strong><br>
+                {{ tarea.descripcion }}
+            </p>
+            <p>
+                <strong>Fecha de inicio:</strong><br>
+                {{ tarea.fecha_inicial|date:"d/m/Y" }}
+            </p>
+            <p>
+                <strong>Fecha límite:</strong><br>
+                {{ tarea.fecha_limite|date:"d/m/Y" }}
+            </p>
+            <p>
+                <strong>Acabada:</strong><br>
+                {{ tarea.esta_completado }}
+            </p>
+        </div>
     </div>
 </section>
 

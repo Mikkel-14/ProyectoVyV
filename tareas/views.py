@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from diagrama_gantt.models import Proyecto, Tarea
 from datetime import datetime, timedelta
 from .forms import IngresoTarea
@@ -34,4 +34,14 @@ def crear_tarea(request, id_proyecto):
         return render(request, 'crear_tarea.html', data)
 
 def ver_tarea(request, id_proyecto, id_tarea):
-    return HttpResponse(f"Ver tarea {id_tarea}")
+    proyecto = Proyecto.objects.get(id=id_proyecto)
+    tarea = Tarea.objects.get(id=id_tarea)
+    if id_proyecto == tarea.proyecto_id:
+        data = {
+            'tarea': tarea,
+            'proyecto': proyecto
+        }
+        return render(request, 'ver_tarea.html', data)
+    else:
+        raise Http404(f"Tarea no encontrada en el proyecto {proyecto.nombre_proyecto}")
+        #return redirect('not_found')
