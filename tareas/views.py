@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404
 from diagrama_gantt.models import Proyecto, Tarea
-from datetime import datetime, timedelta
+from django.contrib.auth.decorators import login_required
 from .forms import IngresoTarea
 
+
 # Create your views here.
+@login_required(login_url='login')
 def crear_tarea(request, id_proyecto):
     proyecto = Proyecto.objects.get(id=id_proyecto)
     if request.method == 'POST':
@@ -33,6 +35,8 @@ def crear_tarea(request, id_proyecto):
         }
         return render(request, 'crear_tarea.html', data)
 
+
+@login_required(login_url='login')
 def ver_tarea(request, id_proyecto, id_tarea):
     proyecto = Proyecto.objects.get(id=id_proyecto)
     tarea = Tarea.objects.get(id=id_tarea)

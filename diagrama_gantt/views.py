@@ -1,11 +1,12 @@
 from datetime import timedelta, datetime, date
-
 from django.shortcuts import render, redirect
 from diagrama_gantt.models import Proyecto, Tarea, Estado
 from django.db.models import Min, Max
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
+@login_required(login_url='login')
 def acceso_tareas_guard(request, id_proyecto):
     proyecto = Proyecto.objects.get(id=id_proyecto)
     if proyecto.tiene_tareas():
@@ -13,6 +14,7 @@ def acceso_tareas_guard(request, id_proyecto):
     return redirect('crearTarea', id_proyecto)
 
 
+@login_required(login_url='login')
 def index(request, id_proyecto):
     proyecto = Proyecto.objects.get(id=id_proyecto)
     tareas = Tarea.objects.filter(proyecto=id_proyecto)

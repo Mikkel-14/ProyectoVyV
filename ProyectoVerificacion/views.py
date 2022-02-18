@@ -1,5 +1,6 @@
 from .forms import BasicUserCreationForm
 from django.shortcuts import render,redirect
+from django.contrib.auth import logout
 
 
 def register_view(request):
@@ -11,3 +12,8 @@ def register_view(request):
             return redirect('login')
 
     return render(request, 'registro_usuario.html', {'form': form})
+
+
+def cerrar_sesion(request):
+    logout(request)
+    return redirect('login')
