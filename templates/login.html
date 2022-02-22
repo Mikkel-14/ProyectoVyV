@@ -36,6 +36,11 @@
             {{ form.password | add_class:"form-control" | add_class:"mb-2"}}
             <button type="submit" class="btn btn-primary mb-2">Iniciar sesión</button>
             <p>¿No tienes una cuenta? Regístrate <a href="{% url 'registro' %}">aquí</a></p>
+            {% if form.errors %}
+            <div class="alert alert-warning" role="alert">
+                {{ form.non_field_errors }}
+            </div>
+            {% endif %}
         </form>
     </div>
 </body>

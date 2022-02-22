@@ -41,7 +41,13 @@
             {{ form.password2 | add_class:"form-control" | add_class:"mb-2"}}
             <button type="submit" class="btn btn-primary">Registrar usuario</button>
             <p>¿Ya tienes un usuario? <a href="{% url 'login' %}">Inicia sesión</a></p>
-            {{ form.errors }}
+            {% if form.errors %}
+            <div class="alert alert-warning" role="alert">
+                {{ form.errors.username }}
+                {{ form.errors.password1 }}
+                {{ form.errors.password2 }}
+            </div>
+            {% endif %}
         </form>
     </div>
 </body>
