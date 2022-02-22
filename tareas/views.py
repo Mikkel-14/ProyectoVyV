@@ -9,6 +9,9 @@ from .forms import IngresoTarea
 @login_required(login_url='login')
 def crear_tarea(request, id_proyecto):
     proyecto = Proyecto.objects.get(id=id_proyecto)
+    # Si el usuario no tiene permisos para crear tareas se redirige
+    if not request.user.has_perm('diagrama_gantt.add_tarea'):
+        return redirect('gantt', proyecto.id)
     if request.method == 'POST':
         formulario = IngresoTarea(request.POST)
         if formulario.is_valid():
@@ -48,4 +51,3 @@ def ver_tarea(request, id_proyecto, id_tarea):
         return render(request, 'ver_tarea.html', data)
     else:
         raise Http404(f"Tarea no encontrada en el proyecto {proyecto.nombre_proyecto}")
-        #return redirect('not_found')
