@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, Http404
+from django.http import Http404
 from diagrama_gantt.models import Proyecto, Tarea
 from django.contrib.auth.decorators import login_required
 from .forms import IngresoTarea
