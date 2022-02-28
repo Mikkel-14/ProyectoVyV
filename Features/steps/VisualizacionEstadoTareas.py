@@ -5,8 +5,9 @@ from diagrama_gantt.views import acceso_tareas_guard
 from django.http import HttpRequest
 from django.shortcuts import redirect
 from datetime import datetime
-from django.contrib.auth import authenticate
+from django.contrib.auth.models import Permission
 from django.contrib.auth.models import User
+
 use_step_matcher("re")
 
 
@@ -15,9 +16,13 @@ def step_impl(context):
     """
     :type context: behave.runner.Context
     """
-    # Se crea un proyecto sin tareas
-    context.user = User.objects.create_user('testuser', 'testUser@verificacionyvalidacion.com', 'VerificacionyValidaci0n')
+    # Se simula que un usuario con permisos va a iniciar sesión
+    context.user = User.objects.create_user('testuser', 'testUser@verificacionyvalidacion.com',
+                                            'VerificacionyValidaci0n')
+    permiso = Permission.objects.get(codename='add_tarea')
+    context.user.user_permissions.add(permiso)
     context.user.save()
+    # Se crea un proyecto sin tareas
     context.proyecto = Proyecto(nombre_proyecto="Proyecto sin tareas")
     context.proyecto.save()
     orquestador = ProyectoTareaController(context.proyecto)
