@@ -1,9 +1,12 @@
-from diagrama_gantt.models import Proyecto, Tarea, Estado
+from diagrama_gantt.models import Tarea, Estado, ProyectoTareaController
+from proyectos.models import Proyecto
 from behave import *
 from diagrama_gantt.views import acceso_tareas_guard
 from django.http import HttpRequest
 from django.shortcuts import redirect
 from datetime import datetime
+from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
 use_step_matcher("re")
 
 
@@ -13,15 +16,20 @@ def step_impl(context):
     :type context: behave.runner.Context
     """
     # Se crea un proyecto sin tareas
+    context.user = User.objects.create_user('testuser', 'testUser@verificacionyvalidacion.com', 'VerificacionyValidaci0n')
+    context.user.save()
     context.proyecto = Proyecto(nombre_proyecto="Proyecto sin tareas")
     context.proyecto.save()
-    assert not context.proyecto.tiene_tareas()
+    orquestador = ProyectoTareaController(context.proyecto)
+    assert not orquestador.tiene_tareas()
 
 
 @step("el sistema redirigirá al usuario a la ventana de creación de nueva tarea")
 def step_impl(context):
-    expected = redirect('crearTarea', context.proyecto.id ).url
-    actual = acceso_tareas_guard(HttpRequest(), context.proyecto.id).url
+    expected = redirect('crearTarea', context.proyecto.id).url
+    request = HttpRequest()
+    request.user = context.user
+    actual = acceso_tareas_guard(request, context.proyecto.id).url
     assert expected == actual
 
 

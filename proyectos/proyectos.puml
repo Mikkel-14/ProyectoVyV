@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Proyecto{
+    - nombre_proyecto: String
+    tiene_tareas() : bool
+}
+
+class Usuario{
+    - username: String
+    - password : String
+    - email : String
+    - grupo : Group
+}
+
+Proyecto "*" o-- "*" Usuario
+@enduml

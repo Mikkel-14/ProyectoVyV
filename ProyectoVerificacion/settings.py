@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'bootstrap5',
     'diagrama_gantt',
     'tareas',
+    'proyectos',
     'behave_django',
     'widget_tweaks'
 ]

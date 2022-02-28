@@ -1,13 +1,14 @@
 from django.db import models
 from datetime import datetime
+from proyectos.models import Proyecto
 
 
-class Proyecto(models.Model):
-    nombre_proyecto = models.CharField(max_length=100)
+class ProyectoTareaController:
+    def __init__(self, proyecto):
+        self.proyecto = proyecto
 
     def tiene_tareas(self):
-        return Tarea.objects.filter(proyecto=self.id).count() > 0
-
+        return Tarea.objects.filter(proyecto=self.proyecto.id).count() > 0
 
 class Estado(models.Model):
     nombre_estado = models.CharField(max_length=20)
