@@ -58,6 +58,12 @@
                 <strong>Acabada:</strong><br>
                 {{ tarea.esta_completado }}
             </p>
+            {% if perms.diagrama_gantt.change_tarea %}
+                <a href={% url 'editarTarea' proyecto.id tarea.id %} class="btn btn-primary">Editar</a>
+            {% endif %}
+            {% if perms.diagrama_gantt.delete_tarea %}
+                <a href={% url 'eliminarTarea' proyecto.id tarea.id %} class="btn btn-danger">Eliminar</a>
+            {% endif %}
         </div>
     </div>
 </section>

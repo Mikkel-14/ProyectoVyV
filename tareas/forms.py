@@ -1,5 +1,4 @@
 from django import forms
-from datetime import datetime, timedelta
 
 
 class IngresoTarea(forms.Form):
@@ -20,21 +19,19 @@ class IngresoTarea(forms.Form):
                                           'placeholder': 'Descripción'
                                       }
                                   ))
-    fecha_inicio = forms.DateField(label="Fecha de inicio",
-                                   widget=forms.DateInput(
+    fecha_inicial = forms.DateField(label="Fecha de inicio",
+                                    widget=forms.DateInput(
                                        attrs={
                                            'class': 'form-control',
                                            'id': 'fecha_inicial',
-                                           'min': datetime.today().date().strftime('%Y-%m-%d'),
                                            'type': 'date'
                                        })
-                                   )
+                                    )
     fecha_limite = forms.DateField(label="Fecha límite",
                                    widget=forms.DateInput(
                                        attrs={
                                            'class': 'form-control',
                                            'id': 'fecha_limite',
-                                           'min': (datetime.today() + timedelta(days=1)).date().strftime('%Y-%m-%d'),
                                            'type': 'date'
                                        })
                                    )

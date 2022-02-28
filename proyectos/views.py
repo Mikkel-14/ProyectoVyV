@@ -3,7 +3,7 @@ from proyectos.models import Proyecto, ProyectoUsuario
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 
-# Create your views here.
+
 @login_required(login_url='login')
 def acceso_proyectos_guard(request):
     usuario = request.user
@@ -18,5 +18,11 @@ def crear_proyecto(request):
     pass
 
 
+@login_required(login_url='login')
 def index(request):
-    pass
+    usuario = request.user
+    listaProyectos = ProyectoUsuario.obtener_proyectos(usuario=usuario)
+    data = {
+        'proyectos': listaProyectos,
+    }
+    return render(request, 'ver_proyectos.html', data)

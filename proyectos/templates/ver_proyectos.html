@@ -1,0 +1,48 @@
+{% load bootstrap5 %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <meta charset="UTF-8">
+    <title>Proyectos</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles_proyectos.css' %}">
+</head>
+<body class="container-fluid">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Proyectos</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                {% if perms.proyectos.add_proyecto %}
+                <li>
+                    <a class="nav-link active" aria-current="page" href={% url 'crearProyecto' %}>Nuevo proyecto</a>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'cerrar_sesion' %}">Cerrar sesión</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<section class="container-fluid">
+    {% for item in proyectos %}
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">{{item.nombre_proyecto}}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Ver proyecto</a>
+              <a href="#" class="btn btn-danger">Eliminar</a>
+            </div>
+        </div>
+    {% endfor %}
+</section>
+</body>
+</html>
