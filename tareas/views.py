@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import IngresoTarea
 from django.forms.models import model_to_dict
 from datetime import datetime, timedelta
+from ProyectoVerificacion.views import acceso_proyecto_guard
 
 
 def tarea_contenida_en_proyecto_guard(id_proyecto, tarea):
@@ -14,6 +15,10 @@ def tarea_contenida_en_proyecto_guard(id_proyecto, tarea):
 
 @login_required(login_url='login')
 def crear_tarea(request, id_proyecto):
+    # Si el usuario no tiene acceso a dicho proyecto
+    if not acceso_proyecto_guard(request, id_proyecto):
+        return redirect('verProyectos')
+
     proyecto = Proyecto.objects.get(id=id_proyecto)
     # Si el usuario no tiene permisos para crear tareas se redirige
     if not request.user.has_perm('diagrama_gantt.add_tarea'):
@@ -50,8 +55,9 @@ def crear_tarea(request, id_proyecto):
 
 @login_required(login_url='login')
 def ver_tarea(request, id_proyecto, id_tarea):
-
-    # TODO: Guarda para que no acceda a un proyecto que no le corresponda
+    # Si el usuario no tiene acceso a dicho proyecto
+    if not acceso_proyecto_guard(request, id_proyecto):
+        return redirect('verProyectos')
 
     proyecto = Proyecto.objects.get(id=id_proyecto)
     # Si el usuario no tiene permisos para crear tareas se redirige
@@ -70,6 +76,10 @@ def ver_tarea(request, id_proyecto, id_tarea):
 
 @login_required(login_url='login')
 def editar_tarea(request, id_proyecto, id_tarea):
+    # Si el usuario no tiene acceso a dicho proyecto
+    if not acceso_proyecto_guard(request, id_proyecto):
+        return redirect('verProyectos')
+
     proyecto = Proyecto.objects.get(id=id_proyecto)
     tarea = Tarea.objects.get(id=id_tarea)
     # Si el usuario no tiene permisos para crear tareas se redirige
@@ -109,6 +119,9 @@ def editar_tarea(request, id_proyecto, id_tarea):
 
 @login_required(login_url='login')
 def eliminar_tarea(request, id_proyecto, id_tarea):
+    # Si el usuario no tiene acceso a dicho proyecto
+    if not acceso_proyecto_guard(request, id_proyecto):
+        return redirect('verProyectos')
     tarea = Tarea.objects.get(id=id_tarea)
     # Si el usuario no tiene permisos para crear tareas se redirige
     if request.user.has_perm('diagrama_gantt.delete_tarea') and tarea_contenida_en_proyecto_guard(id_proyecto, tarea):

@@ -19,6 +19,7 @@ td:first-child {
     top: 0 !important;
     background: white;
     z-index: 3;
+    max-width: 135px;
 }
 nav{
     height: 6.5vh;

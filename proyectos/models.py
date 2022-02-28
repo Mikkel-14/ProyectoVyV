@@ -27,3 +27,5 @@ class ProyectoUsuario(models.Model):
         nuevo_proyecto.agregar_colaborador(usuario=usuario)
         return nuevo_proyecto
         
+    def numero_colaboradores(id_proyecto):
+        return ProyectoUsuario.objects.filter(id_proyecto=id_proyecto).count()

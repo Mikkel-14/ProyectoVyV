@@ -1,0 +1,20 @@
+nav{
+    height: 6.5vh;
+}
+section{
+    overflow: auto;
+    height: 93.5vh;
+    padding: 0 !important;
+}
+.card-grid {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+.selected {
+    background-color: rgb(84, 84, 84);
+    color: white !important;
+}

@@ -5,6 +5,7 @@ from proyectos.models import Proyecto
 from django.db.models import Min, Max
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from ProyectoVerificacion.views import acceso_proyecto_guard
 
 
 # Create your views here.
@@ -14,6 +15,7 @@ def acceso_tareas_guard(request, id_proyecto):
     orquestador = ProyectoTareaController(proyecto)
     if orquestador.tiene_tareas():
         return index(request, id_proyecto)
+    # Si el usuario tiene permiso para crear tareas
     if request.user.has_perm('diagrama_gantt.add_tarea'):
         return redirect('crearTarea', id_proyecto)
     return HttpResponse(status=204)
@@ -21,12 +23,16 @@ def acceso_tareas_guard(request, id_proyecto):
 
 @login_required(login_url='login')
 def index(request, id_proyecto):
+    # Si el usuario no tiene acceso a dicho proyecto
+    if not acceso_proyecto_guard(request, id_proyecto):
+        return redirect('verProyectos')
+
     proyecto = Proyecto.objects.get(id=id_proyecto)
     tareas = Tarea.objects.filter(proyecto=id_proyecto)
 
     # El proyecto puede tener una fecha inicial y una de fin o ser calculadas???
-    menor_fecha = Tarea.objects.all().aggregate(Min('fecha_inicial'))['fecha_inicial__min']
-    mayor_fecha = Tarea.objects.all().aggregate(Max('fecha_limite'))['fecha_limite__max']
+    menor_fecha = Tarea.objects.filter(proyecto_id=id_proyecto).aggregate(Min('fecha_inicial'))['fecha_inicial__min']
+    mayor_fecha = Tarea.objects.filter(proyecto_id=id_proyecto).aggregate(Max('fecha_limite'))['fecha_limite__max']
 
     diferencia_dias = mayor_fecha - menor_fecha
 
