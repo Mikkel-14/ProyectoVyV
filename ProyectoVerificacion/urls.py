@@ -19,9 +19,10 @@ from django.contrib.auth import views as auth_views
 from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('proyectos/', include('proyectos.urls')),
     path('proyectos/<int:id_proyecto>/gantt/', include('diagrama_gantt.urls')),
     path('proyectos/<int:id_proyecto>/tareas/', include('tareas.urls')),
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('cerrarsesion', views.cerrar_sesion, name='cerrar_sesion'),
-    path('registro/', views.register_view, name='registro')
+    path('registro/', views.register_view, name='registro'),
 ]

@@ -17,5 +17,11 @@ class Estado{
     - color_estado: String
 }
 
+class ProyectoTareasController{
+    + tiene_tareas(): boolean
+}
+
 Proyecto o-- "*" Tarea
+ProyectoTareasController ..> Tarea
+ProyectoTareasController --> Proyecto
 @enduml

@@ -10,6 +10,7 @@ class ProyectoTareaController:
     def tiene_tareas(self):
         return Tarea.objects.filter(proyecto=self.proyecto.id).count() > 0
 
+
 class Estado(models.Model):
     nombre_estado = models.CharField(max_length=20)
     color_estado = models.CharField(max_length=9)

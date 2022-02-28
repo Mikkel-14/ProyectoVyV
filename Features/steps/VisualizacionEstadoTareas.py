@@ -5,8 +5,7 @@ from diagrama_gantt.views import acceso_tareas_guard
 from django.http import HttpRequest
 from django.shortcuts import redirect
 from datetime import datetime
-from django.contrib.auth.models import Permission
-from django.contrib.auth.models import User
+from django.contrib.auth.models import Permission, User
 
 use_step_matcher("re")
 

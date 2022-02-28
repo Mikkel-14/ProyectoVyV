@@ -3,15 +3,21 @@
 
 class Proyecto{
     - nombre_proyecto: String
-    tiene_tareas() : bool
+    + agregar_colaborador(usuario:Usuario)
 }
 
 class Usuario{
     - username: String
     - password : String
-    - email : String
     - grupo : Group
 }
 
-Proyecto "*" o-- "*" Usuario
+class ProyectoUsuario{
+    + {static} tiene_proyectos(usuario:Usuario):boolean
+    + {static} obtener_proyectos(usuario:Usuario): Proyecto[]
+    + {static} crear_proyecto(nombre_proyecto:String, usuario_creador:Usuario):Proyecto
+}
+
+Proyecto "*" -- "*" Usuario
+Proyecto .. ProyectoUsuario
 @enduml
