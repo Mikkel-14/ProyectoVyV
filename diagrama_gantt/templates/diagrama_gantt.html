@@ -79,7 +79,9 @@
                         </a>
                     </td>
                     <!-- Botón tarea -->
+                    {% if item.dia_offset != 0 %}
                     <td colspan={{ item.dia_offset }}></td>
+                    {% endif %}
                     <td colspan={{ item.duracion }}>
                         <a class="btn tarea" style={{ item.color_estado }}
                             href={% url 'verTarea' id_proyecto=proyecto.id id_tarea=item.tarea.id %}>

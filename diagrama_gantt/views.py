@@ -4,6 +4,7 @@ from diagrama_gantt.models import Tarea, ProyectoTareaController
 from proyectos.models import Proyecto
 from django.db.models import Min, Max
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 
 
 # Create your views here.
@@ -13,7 +14,9 @@ def acceso_tareas_guard(request, id_proyecto):
     orquestador = ProyectoTareaController(proyecto)
     if orquestador.tiene_tareas():
         return index(request, id_proyecto)
-    return redirect('crearTarea', id_proyecto)
+    if request.user.has_perm('diagrama_gantt.add_tarea'):
+        return redirect('crearTarea', id_proyecto)
+    return HttpResponse(status=204)
 
 
 @login_required(login_url='login')
