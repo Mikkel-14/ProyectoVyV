@@ -74,16 +74,20 @@ def index(request, id_proyecto):
         for tarea in tareas
     ]
 
+    colspan_semana_inicio = 7 - menor_fecha.weekday()  if menor_fecha.weekday() == 0 else 7 - mayor_fecha.weekday()
+    semanas_intermedias = range(2, int(semanas) + 3)
+    colspan_semana_final = mayor_fecha.weekday() + 1  if len(list(semanas_intermedias)) > 1 else 0
+
     data = {
         'proyecto': proyecto,
         'tareas': datos_tareas,
         'menor_fecha': menor_fecha,
         'mayor_fecha': mayor_fecha,
         'lista_fechas': lista_fechas,
-        'colspan_semana_inicio': 7 - menor_fecha.weekday(),
-        'colspan_semana_final': mayor_fecha.weekday() + 1,
+        'colspan_semana_inicio': colspan_semana_inicio,
+        'colspan_semana_final': colspan_semana_final,
         'meses_info': meses_info,
-        'semanas_intermedias': range(2, int(semanas) + 3),
+        'semanas_intermedias': semanas_intermedias,
         'hoy': datetime.now().date()
     }
 
