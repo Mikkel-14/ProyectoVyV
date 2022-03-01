@@ -4,7 +4,6 @@ from diagrama_gantt.models import Tarea, ProyectoTareaController
 from proyectos.models import Proyecto
 from django.db.models import Min, Max
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
 from ProyectoVerificacion.views import acceso_proyecto_guard
 
 

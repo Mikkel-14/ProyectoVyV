@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from proyectos.models import Proyecto, ProyectoUsuario
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
 from ProyectoVerificacion.views import acceso_proyecto_guard
 from .forms import IngresoProyecto
 from django.contrib.auth.models import User
@@ -14,7 +13,7 @@ def acceso_proyectos_guard(request):
         return index(request)
     if request.user.has_perm('proyectos.add_proyecto'):
         return redirect('crearProyecto')
-    return HttpResponse(status=204)
+    return render(request, 'ver_proyectos_vacio.html')
 
 
 @login_required(login_url='login')
@@ -49,7 +48,7 @@ def index(request):
         'proyectos': listaProyectos,
         'datosProyectos': datosProyectos,
     }
-    return render(request, 'ver_proyectos.html', data)
+    return render(request, 'ver_proyectos_base.html', data)
 
 
 @login_required(login_url='login')
