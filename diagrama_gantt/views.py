@@ -18,7 +18,7 @@ def acceso_tareas_guard(request, id_proyecto):
     # Si el usuario tiene permiso para crear tareas
     if request.user.has_perm('diagrama_gantt.add_tarea'):
         return redirect('crearTarea', id_proyecto)
-    return HttpResponse(status=204)
+    return render(request, 'diagrama_gantt_vacio.html', {'proyecto': proyecto})
 
 
 @login_required(login_url='login')

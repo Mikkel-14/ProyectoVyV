@@ -1,100 +1,63 @@
-{% load bootstrap5 %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
-    <meta charset="UTF-8">
-    <title>Diagrama del proyecto</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'styles_gantt.css' %}">
-</head>
-<body class="container-fluid">
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">{{ proyecto.nombre_proyecto }}</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                {% if perms.diagrama_gantt.add_tarea %}
-                <li>
-                    <a class="nav-link active" aria-current="page" href={% url 'crearTarea' proyecto.id %}>Nueva tarea</a>
-                </li>
-                {% endif %}
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href={% url 'verProyectos' %}>Cambiar de proyecto</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'cerrar_sesion' %}">Cerrar sesión</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<section class="container-fluid">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th id="tareas" scope="col" colspan="1" rowspan="3">Tareas</th>
-                <!-- Semanas-->
-                <th scope="col" colspan={{ colspan_semana_inicio }}>Semana 1</th>
-                {% for value in semanas_intermedias %}
-                    <th scope="col" colspan="7">Semana {{ value }}</th>
-                {% endfor %}
-                {% if colspan_semana_final != 0 %}
-                <th scope="col" colspan={{ colspan_semana_final }}>Semana final</th>
-                {% endif %}
-            </tr>
-            <!-- Meses -->
-            <tr>
-                {% for value in meses_info %}
-                    {% if value.fecha.month == hoy.month %}
-                        <th scope="col" colspan={{ value.colspan }} class="hoy">{{ value.fecha | date:'F' }}</th>
-                    {% else %}
-                        <th scope="col" colspan={{ value.colspan }}>{{ value.fecha | date:'F' }}</th>
-                    {% endif %}
-                {% endfor %}
-            </tr>
-            <!-- Días -->
-            <tr>
-                {% for dia in lista_fechas %}
-                    {% if dia == hoy %}
-                        <th class="dia hoy">{{ dia | date:'D d' }}</th>
-                    {% else %}
-                        <th class="dia">{{ dia | date:'D d' }}</th>
-                    {% endif %}
-                {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in tareas %}
-                <tr>
-                    <!-- Nombre tarea -->
-                    <td>
-                        {{ item.tarea.nombre_tarea }}
-                        <a class="btn btn-primary"
-                            href={% url 'verTarea' id_proyecto=proyecto.id id_tarea=item.tarea.id %}>
-                            Ver tarea
-                        </a>
-                    </td>
-                    <!-- Botón tarea -->
-                    {% if item.dia_offset != 0 %}
-                    <td colspan={{ item.dia_offset }}></td>
-                    {% endif %}
-                    <td colspan={{ item.duracion }}>
-                        <a class="btn tarea" style={{ item.color_estado }}
-                            href={% url 'verTarea' id_proyecto=proyecto.id id_tarea=item.tarea.id %}>
-                            {{ item.tarea.nombre_tarea }} ({{item.estado|capfirst}})
-                        </a>
-                    </td>
-                    <td colspan={{ item.post_offset }}></td>
-                </tr>
+{% extends "diagrama_gantt_base.html" %}
+{% block section %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th id="tareas" scope="col" colspan="1" rowspan="3">Tareas</th>
+            <!-- Semanas-->
+            <th scope="col" colspan={{ colspan_semana_inicio }}>Semana 1</th>
+            {% for value in semanas_intermedias %}
+                <th scope="col" colspan="7">Semana {{ value }}</th>
             {% endfor %}
-        </tbody>
-    </table>
-</section>
-</body>
-</html>
+            {% if colspan_semana_final != 0 %}
+            <th scope="col" colspan={{ colspan_semana_final }}>Semana final</th>
+            {% endif %}
+        </tr>
+        <!-- Meses -->
+        <tr>
+            {% for value in meses_info %}
+                {% if value.fecha.month == hoy.month %}
+                    <th scope="col" colspan={{ value.colspan }} class="hoy">{{ value.fecha | date:'F' }}</th>
+                {% else %}
+                    <th scope="col" colspan={{ value.colspan }}>{{ value.fecha | date:'F' }}</th>
+                {% endif %}
+            {% endfor %}
+        </tr>
+        <!-- Días -->
+        <tr>
+            {% for dia in lista_fechas %}
+                {% if dia == hoy %}
+                    <th class="dia hoy">{{ dia | date:'D d' }}</th>
+                {% else %}
+                    <th class="dia">{{ dia | date:'D d' }}</th>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in tareas %}
+            <tr>
+                <!-- Nombre tarea -->
+                <td>
+                    {{ item.tarea.nombre_tarea }}
+                    <a class="btn btn-primary"
+                        href={% url 'verTarea' id_proyecto=proyecto.id id_tarea=item.tarea.id %}>
+                        Ver tarea
+                    </a>
+                </td>
+                <!-- Botón tarea -->
+                {% if item.dia_offset != 0 %}
+                <td colspan={{ item.dia_offset }}></td>
+                {% endif %}
+                <td colspan={{ item.duracion }}>
+                    <a class="btn tarea" style={{ item.color_estado }}
+                        href={% url 'verTarea' id_proyecto=proyecto.id id_tarea=item.tarea.id %}>
+                        {{ item.tarea.nombre_tarea }} ({{item.estado|capfirst}})
+                    </a>
+                </td>
+                <td colspan={{ item.post_offset }}></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
