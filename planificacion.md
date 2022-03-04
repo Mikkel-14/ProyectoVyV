@@ -76,9 +76,8 @@ Por cada sprint, se entregarán los siguientes productos del trabajo:
 | Fecha de inicio   | Fecha de fin  | Hito                      |
 | ---------------   | ------------  | ---------                 |
 | 20-12-2021        | 23-12-2021    | Sprint 0 completado       |
-| 03-01-2022        | 21-01-2022    | Sprint 1 completado       |
-| 24-01-2022        | 11-02-2022    | Sprint 2 completado       |
-| 14-02-2022        | 01-03-2022    | Sprint 3 completado       |
+| 03-01-2022        | 04-02-2022    | Sprint 1 completado       |
+| 07-02-2022        | 01-03-2022    | Sprint 2 completado       |
 |                   | 07-03-2022    | Presentacion del proyecto |
 <br/>
 
