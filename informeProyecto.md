@@ -1,8 +1,7 @@
 # Informe del proyecto
 
-![Aspectos fundamentales de calidad](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/710f4a7e-cf41-4f7b-a924-167f588b6a04/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220302%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220302T014640Z&X-Amz-Expires=86400&X-Amz-Signature=0db95b646a7f9a1ff39414ac763c7fb4b9251fccd9b475b5f6dacaffce459403&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject)
 
-Las actividades de verificación y validación del software empezaron desde la concepción del proyecto de software. Mediante la planificación del proyecto, se establecieron objetivos que debe cumplir el producto, por lo tanto, que pueden derivar en métricas para determinar el grado de conformidad del cliente y **validar** cuán apto es el producto para su uso. Adicionalmente, se establecieron las herramientas de apoyo para **verificar** que el producto se haga correctamente. 
+Las actividades de verificación y validación del software empezaron desde la concepción del proyecto de software. Mediante la [planificación del proyecto](https://github.com/Mikkel-14/ProyectoVyV/blob/main/planificacion.md), se establecieron objetivos que debe cumplir el producto, por lo tanto, que pueden derivar en métricas para determinar el grado de conformidad del cliente y **validar** cuán apto es el producto para su uso. Adicionalmente, se establecieron las herramientas de apoyo para **verificar** que el producto se haga correctamente. 
 
 A lo largo del ciclo de vida de desarrollo se adoptó un desarrollo dirigido por comportamiento, el cual nos proporcionó algunas prácticas y herramientas de apoyo a las actividades de verificación y validación, como las siguientes: 
 
